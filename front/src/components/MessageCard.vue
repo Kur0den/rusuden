@@ -12,10 +12,12 @@ watch(() => props.playing, (on) => {
 </script>
 
 <template>
-  <div class="card">
-    <h3 class="caller-name">{{ message.callerName }}</h3> - <h4 class="caller-id">{{ message.callerId }}</h4>
-    <audio rel="el" controls preload="none" :src="message.url" @play="emit('play', message.id)",
+  <div>
+    <h3>{{ message.callerName }} - <span>{{ message.callerId }}</span></h3>
+    <audio ref="el" controls preload="none" :src="message.url" @play="emit('play', message.id)",
       @ended="emit('stop', message.id)"
     />
+    <p>{{ message.created }}</p>
+    <button>さくじょ</button>
   </div>
 </template>
