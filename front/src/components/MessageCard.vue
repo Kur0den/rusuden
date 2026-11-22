@@ -14,7 +14,7 @@ watch(() => props.playing, (on) => {
 <template>
   <div>
     <h3>{{ message.callerName }} - <span>{{ message.callerId }}</span></h3>
-    <audio ref="el" controls preload="none" :src="message.url" @play="emit('play', message.id)",
+    <audio ref="el" controls preload="none" :src="message.url" @play="emit('play', message.id)"
       @ended="emit('stop', message.id)"
     />
     <p>{{ message.created }}</p>
