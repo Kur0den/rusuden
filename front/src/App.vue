@@ -1,24 +1,28 @@
 <script setup lang="ts">
-import { listMessages } from './api';
-import { onMounted, ref } from 'vue';
-import MessageCard from './components/MessageCard.vue';
-import type { Message } from './type';
+import { listMessages } from './api'
+import { onMounted, ref } from 'vue'
+import MessageCard from './components/MessageCard.vue'
+import type { Message } from './type'
 
 const playing = ref<number | null>(null)
 
 const isLoading = ref(true)
 const messages = ref<Message[]>([])
-const errorMsg = ref("")
+const errorMsg = ref('')
 
 onMounted(async () => {
   try {
     messages.value = await listMessages()
-  } catch(e) {
+  } catch (e) {
     errorMsg.value = e instanceof Error ? e.message : String(e)
   } finally {
     isLoading.value = false
   }
 })
+
+function deleteMessage(id: number) {
+  console.log('Delete: ' + id)
+}
 </script>
 
 <template>
@@ -27,7 +31,15 @@ onMounted(async () => {
   <p v-else-if="errorMsg">{{ errorMsg }}</p>
   <p v-else-if="messages.length === 0">留守電はありません</p>
   <template v-else>
-    <MessageCard v-for="m in messages" :key="m.id" :message="m" :playing="playing === m.id" @play="playing = m.id" @stop="playing = null" />
+    <MessageCard
+      v-for="m in messages"
+      :key="m.id"
+      :message="m"
+      :playing="playing === m.id"
+      @play="playing = m.id"
+      @stop="playing = null"
+      @delete="deleteMessage(m.id)"
+    />
   </template>
 </template>
 
