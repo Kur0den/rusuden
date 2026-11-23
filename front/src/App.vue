@@ -38,7 +38,7 @@ function deleteMessage(id: number) {
       :playing="playing === m.id"
       @play="playing = m.id"
       @stop="playing = null"
-      @delete="deleteMessage(m.id)"
+      @delete="deleteMessage"
     />
   </template>
 </template>
