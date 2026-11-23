@@ -1,32 +1,17 @@
 import type { Message } from './type.ts'
 
-export async function listMessages(): Promise<Message[]> {
-  const Messages: Message[] = [
-    {
-      id: 1,
-      callerName: 'test',
-      callerId: '000',
-      created: new Date().toISOString(),
-      url: '/dummy1.wav',
-    },
-    {
-      id: 2,
-      callerName: 'test',
-      callerId: '001',
-      created: new Date().toISOString(),
-      url: '/dummy1.wav',
-    },
-    {
-      id: 3,
-      callerName: 'test',
-      callerId: '999000',
-      created: new Date().toISOString(),
-      url: '/dummy1.wav',
-    },
-  ]
+const BASE = import.meta.env.VITE_API_BASE_URL ?? ''
 
-  const sleep = () => new Promise<void>((resolve) => setTimeout(resolve, 2000))
-  await sleep()
-
-  return Messages
+async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
+  const res = await fetch(BASE + path, {
+    ...init,
+    headers: { 'Content-Type': 'application/json', ...init.headers },
+    signal: AbortSignal.timeout(10_000),
+  })
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
+  if (res.status === 204) return undefined as T
+  return (await res.json()) as T
 }
+
+export const listMessages = () => request<Message[]>('/api/messages')
+export const deleteMessage = (id: number) => request<void>(`/messages/${id}`, { method: 'DELETE' })
