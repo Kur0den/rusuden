@@ -31,7 +31,7 @@ function deleteMessage(id: number) {
     <p v-if="isLoading" class="py-8 text-center opacity-60">Loading...</p>
     <p v-else-if="errorMsg" class="alert alert-error">{{ errorMsg }}</p>
     <p v-else-if="messages.length === 0" class="py-8 text-center opacity-60">留守電はありません</p>
-    <template v-else class="flex flex-col gap-3">
+    <div v-else class="flex flex-col gap-3">
       <MessageCard
         v-for="m in messages"
         :key="m.id"
@@ -41,7 +41,7 @@ function deleteMessage(id: number) {
         @stop="playing = null"
         @delete="deleteMessage"
       />
-    </template>
+    </div>
   </div>
 </template>
 
