@@ -25,7 +25,7 @@ export async function listMessages(): Promise<Message[]> {
     },
   ]
 
-  const sleep = () => new Promise<void>((resolve) => setTimeout(resolve(), 2000))
+  const sleep = () => new Promise<void>((resolve) => setTimeout(resolve, 2000))
   await sleep()
 
   return Messages
