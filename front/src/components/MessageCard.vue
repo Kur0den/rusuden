@@ -18,7 +18,7 @@ watch(
   <div class="card border border-base-300 bg-base-200 shadow-sm">
     <div class="card-body gap-2 p-4">
       <h3 class="flex items-baseline justify-self-start gap-3 text-xl font-bold">
-        {{ message.callerName }}  <span class="text-sm font-semibold">{{ message.callerId }}</span>
+        {{ message.callerName }} <span class="text-sm font-semibold">{{ message.callerId }}</span>
       </h3>
       <audio
         ref="el"
@@ -30,7 +30,13 @@ watch(
       />
       <div class="flex item-center justify-between gap-3">
         <p class="text-sm opacity-60">{{ message.created }}</p>
-        <button type="button" class="btn btn-outline btn-error btn-sm" @click="emit('delete', message.id)">さくじょ</button>
+        <button
+          type="button"
+          class="btn btn-outline btn-error btn-sm"
+          @click="emit('delete', message.id)"
+        >
+          さくじょ
+        </button>
       </div>
     </div>
   </div>
