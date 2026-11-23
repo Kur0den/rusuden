@@ -25,22 +25,24 @@ function deleteMessage(id: number) {
 }
 </script>
 
-<template>
-  <h1>rusuden</h1>
-  <p v-if="isLoading">Loading...</p>
-  <p v-else-if="errorMsg">{{ errorMsg }}</p>
-  <p v-else-if="messages.length === 0">留守電はありません</p>
-  <template v-else>
-    <MessageCard
-      v-for="m in messages"
-      :key="m.id"
-      :message="m"
-      :playing="playing === m.id"
-      @play="playing = m.id"
-      @stop="playing = null"
-      @delete="deleteMessage"
-    />
-  </template>
+<template class="min-h-screen bg-base-100 text-base-content">
+  <div class="mx-auto max-w-2xl px-5 py-8">
+    <h1 class="mb-6 text-2xl font-bold tracking-wide">rusuden</h1>
+    <p v-if="isLoading" class="py-8 text-center opacity-60">Loading...</p>
+    <p v-else-if="errorMsg" class="alert alert-error">{{ errorMsg }}</p>
+    <p v-else-if="messages.length === 0" class="py-8 text-center opacity-60">留守電はありません</p>
+    <template v-else class="flex flex-col gap-3">
+      <MessageCard
+        v-for="m in messages"
+        :key="m.id"
+        :message="m"
+        :playing="playing === m.id"
+        @play="playing = m.id"
+        @stop="playing = null"
+        @delete="deleteMessage"
+      />
+    </template>
+  </div>
 </template>
 
 <style scoped></style>

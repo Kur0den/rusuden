@@ -24,5 +24,10 @@ export async function listMessages(): Promise<Message[]> {
       url: '/dummy1.wav',
     },
   ]
+
+
+  const sleep = () => new Promise<void>((resolve) => setTimeout(resolve(), 2000))
+  await sleep()
+
   return Messages
 }
