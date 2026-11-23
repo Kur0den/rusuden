@@ -31,7 +31,9 @@ function deleteMessage(id: number) {
       <h1 class="mb-6 text-2xl font-bold tracking-wide">rusuden</h1>
       <p v-if="isLoading" class="py-8 text-center opacity-60">Loading...</p>
       <p v-else-if="errorMsg" class="alert alert-error">{{ errorMsg }}</p>
-      <p v-else-if="messages.length === 0" class="py-8 text-center opacity-60">留守電はありません</p>
+      <p v-else-if="messages.length === 0" class="py-8 text-center opacity-60">
+        留守電はありません
+      </p>
       <div v-else class="flex flex-col gap-3">
         <MessageCard
           v-for="m in messages"
